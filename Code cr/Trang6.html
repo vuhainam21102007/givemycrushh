@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Invitation - Page 6</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(to bottom, #ffb3ba, #ffdfba);
+            color: #ad1457;
+            text-align: center;
+            padding: 20px; /* Giảm padding để tránh tràn trên mobile */
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .letter-container {
+            margin-bottom: 20px;
+        }
+        .letter-image {
+            width: 250px; /* Giảm kích cỡ hình để tránh tràn */
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .letter-image:hover {
+            transform: scale(1.05);
+        }
+        .letter-content {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ad1457;
+            border-radius: 20px;
+            padding: 15px; /* Giảm padding */
+            width: 90%; /* Sử dụng % để responsive */
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: 'Arial', sans-serif;
+            font-size: 1em; /* Giảm cỡ chữ để tránh tràn */
+            line-height: 1.5; /* Giảm line-height */
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            word-wrap: break-word; /* Ngắt từ nếu cần */
+            overflow-wrap: break-word;
+        }
+        .vote-section {
+            display: none;
+            margin-top: 20px;
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Cho phép wrap nếu cần */
+            margin-bottom: 20px;
+        }
+        .star {
+            font-size: 1.5em; /* Giảm kích cỡ ngôi sao */
+            cursor: pointer;
+            color: #000; /* Màu đen mặc định */
+            transition: color 0.3s;
+            margin: 0 2px; /* Khoảng cách nhỏ */
+        }
+        .star.selected {
+            color: #ffd700; /* Màu vàng khi selected */
+        }
+        .result {
+            font-size: 1.2em; /* Giảm kích cỡ chữ kết quả */
+            margin-top: 20px;
+        }
+        .snowman {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 40px; /* Giảm kích cỡ emote */
+            z-index: 1;
+            animation: bounce 2s infinite;
+        }
+        .christmas-tree {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 40px; /* Giảm kích cỡ emote */
+            z-index: 1;
+            animation: shake 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: snowFall linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes snowFall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        /* Responsive cho mobile */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            .letter-image {
+                width: 200px;
+            }
+            .letter-content {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            .star {
+                font-size: 1.2em;
+            }
+            .result {
+                font-size: 1em;
+            }
+            .snowman, .christmas-tree {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowman">❄️</div>
+    <div class="christmas-tree">🎄</div>
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <h1>Here's a letter for you</h1>
+    
+    <div class="letter-container">
+        <img src="img/thư.jpg" alt="Letter" class="letter-image" id="letterImg"> <!-- Thay bằng đường dẫn hình ảnh thư của bạn -->
+    </div>
+    
+    <div class="letter-content" id="letterContent">
+        <p>Gửi Giang</p>
+        <p>Có lẽ khi cậu nhận được món quà và bức thư này cậu sẽ cảm thấy sự cringe cringe cực mạnh từ tớ hẹ hẹ. Sau 1 tuần nhắn tin dù thấy cậu hơi lạnh lùng và cố gắng tạo khoảng cách với tớ ko biết có phải do cách tớ nhắn tin quá nhạt nhẽo hay bị quá vội vàng chăng. Nhưng mà tớ cảm thấy sự thẳng thắn và cách nói chuyện khá funny và friendly từ cậu chắc do sự tôn trọng của cậu với tớ chăng >< nma tơ rất cảm ơn vì điều đó.</p>
+        <p>Nói sao ta…. Uhm thật ra lý do tớ thích cậu nói là “love at first sight” có thể đúng chăng. Không biết do mắt tớ mù hay chăng mà phải đến tận tiết học quân sự đó tớ mới thấy một thiên thần giáng trần chăng. Đêm đó tớ về tìm hiểu thì thấy cậu ngoài: mắt to, mặt thon, dáng người cao hơn một tí, lại còn đeo kính nữa thì có đặc điểm gì đâu; Tớ mà thích cậu á!!! Người ta nói cũng đúng con trai bọn tớ yêu vì mắt nma thật sự chỉ vì một ánh nhìn mà say mê z chắc chỉ có cậu là đầu tiên thôi đó ha 😊.</p>
+        <p>Có thể cậu kbiet gì về tớ nma chắc cũng cảm nhận được tớ ko giỏi nói chuyện và bày tỏ với một người phụ nữ lắm @@. Lạ ha mang tiếng Thiên Bình T10 redflag nói z ai tin, nma thật sự tớ có thể không hoàn hảo, đẹp trai, tài giỏi giống bạch mã hoàng tử trong mơ của cậu nhưng tớ mong cậu sẽ cho tớ một cơ hội để có thể theo đuổi và làm quen cậu. Vì nếu không thành đôi thì thôi “CHÚC EM HẠNH PHÚC” thành 2 bro luôn lúc đấy xích mồm tớ tự mở ra nch lại bth.</p>
+        <p>Sắp tới còn ngày 18/12 là xog môn NLS sẽ rất lâu ms đc gặp lại cậu nma chúc cậu điểm cao một ngày ms vv nha XD. Lần sau kbiet rủ đi STUDY CAFÉ cấm từ chối!!!!</p>
+        <p>GOOD BYE AND SEE U AGAIN</p>
+        <p style="text-align: right;">Secret MAN</p>
+    </div>
+    
+    <div class="vote-section" id="voteSection">
+        <p>Vote tớ BNH điểm từ 1 đến 10 sao:</p>
+        <div class="stars" id="stars">
+            <span class="star" data-value="1">⭐</span>
+            <span class="star" data-value="2">⭐</span>
+            <span class="star" data-value="3">⭐</span>
+            <span class="star" data-value="4">⭐</span>
+            <span class="star" data-value="5">⭐</span>
+            <span class="star" data-value="6">⭐</span>
+            <span class="star" data-value="7">⭐</span>
+            <span class="star" data-value="8">⭐</span>
+            <span class="star" data-value="9">⭐</span>
+            <span class="star" data-value="10">⭐</span>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const letterImg = document.getElementById('letterImg');
+        const letterContent = document.getElementById('letterContent');
+        const voteSection = document.getElementById('voteSection');
+        const stars = document.querySelectorAll('.star');
+        const result = document.getElementById('result');
+        const snowContainer = document.getElementById('snowContainer');
+
+        letterImg.addEventListener('click', () => {
+            letterContent.style.display = 'block';
+            voteSection.style.display = 'block';
+        });
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.dataset.value;
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('selected');
+                }
+                if (value == 10) {
+                    result.textContent = 'wow cảm nắng r chứ j XD';
+                } else {
+                    result.textContent = 'Thanks u';
+                }
+            });
+        });
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            snowContainer.appendChild(snowflake);
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>
